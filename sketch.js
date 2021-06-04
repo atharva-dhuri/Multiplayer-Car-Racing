@@ -1,46 +1,25 @@
-var ball;
-var database;
+var hypnoticBall, database;
+var position;
+var gameState = 0;
+var playerCount;
+
+var game, player, form;
+
 
 function setup(){
-    createCanvas(500,500);
-    database = firebase.database();
-    var locOfball = database.ref("Ball/position");
-    locOfball.on("value", readPos, showErr);
-    ball = createSprite(250,250,10,10);
-    ball.shapeColor = "red";
+  database = firebase.database();
+  console.log(database);
+  createCanvas(500,500);
+
+  game = new Game();
+  game.getState();
+  game.start();
+  
 }
 
 function draw(){
-    background("white");
-    if(keyDown(LEFT_ARROW)){
-        changePosition(-1,0);
-    }
-    else if(keyDown(RIGHT_ARROW)){
-        changePosition(1,0);
-    }
-    else if(keyDown(UP_ARROW)){
-        changePosition(0,-1);
-    }
-    else if(keyDown(DOWN_ARROW)){
-        changePosition(0,+1);
-    }
-    drawSprites();
-}
-
-function changePosition(x,y){
-    database.ref("Ball/position").set({
-        'x': ball.x+x,
-        'y': ball.y+y
-    })
-}
-
-function readPos(data) {
-    var pos = data.val();
-
-    ball.x = pos.x;
-    ball.y = pos.y;
-}
-
-function showErr() {
-    console.log("There is a error");
+  
+    
+  drawSprites();
+  
 }
