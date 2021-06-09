@@ -24,5 +24,33 @@ class Game {
             form.display();
         }
     }
+
+    play() {
+        form.hide();
+        text("Game Has Started", 120, 100);
+        Player.getPlayerInfo();
+
+        if(allPlayers !==undefined) {
+            var displayPos = 130;
+            for(var i in allPlayers) {
+                displayPos +=30
+                if(i ==="player" + player.index){
+                    fill("red");
+                }
+                else{
+                    fill("black");
+                }
+                textSize(25);
+                text(allPlayers[i].name + ": " + allPlayers[i].distance, 120, displayPos);
+            }
+        }
+
+        if(keyIsDown(UP_ARROW) && player.index !==null) {
+            console.log("working");
+            player.distance +=50
+            player.update()
+        }
+
+    }
         
 }
