@@ -7,11 +7,15 @@ var game, player, form;
 
 var allPlayers;
 
+var car1, car2, car3, car4;
+
+var cars = []
+
 
 function setup(){
   database = firebase.database();
   console.log(database);
-  createCanvas(500,500);
+  createCanvas(displayWidth -20, displayHeight -80);
 
   game = new Game();
   game.getState();
@@ -27,8 +31,9 @@ function draw(){
 
   if(gameState ===1) {
     game.play();
+    drawSprites();
   }
     
-  drawSprites();
+  
   
 }
